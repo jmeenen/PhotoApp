@@ -1,0 +1,37 @@
+<% @title = "Register New User" %>
+
+<% if @user %>
+    <% @user.errors.full_messages.each do |msg| %>
+        <div class="newUserError"><%= msg %></div>
+    <% end %><br/>
+<% end %>
+
+<% if flash[:notice] %>
+    <div class="noLoginError"><%= flash[:notice] %></div><br/>
+<% end %>
+
+<%= form_for(:user, :url => {:action => :create}) do |form| %>
+    <table class="form">
+      <tr>
+        <td><%= form.label(:name, "First Name:")%></td>
+        <td><%= form.text_field(:first_name) %></td>
+      </tr>
+      <tr>
+        <td><%= form.label(:name, "Last Name:")%></td>
+        <td><%= form.text_field(:last_name) %></td>
+      </tr>
+      <tr>
+        <td><%= form.label(:name, "Login:")%></td>
+        <td><%= form.text_field(:login) %></td>
+      </tr>
+      <tr>
+        <td><%= form.label(:name, "Password:")%></td>
+        <td><%= form.password_field(:password) %></td>
+      </tr>
+      <tr>
+        <td><%= form.label(:name, "Re-enter Password:")%></td>
+        <td><%= form.password_field(:repeat_password) %></td>
+      </tr>
+    </table>
+    <%= submit_tag "Submit" %>
+<% end %>

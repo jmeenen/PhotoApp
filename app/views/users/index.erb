@@ -1,0 +1,18 @@
+<% @title = "Select Photos by User:" %>
+
+<% @users.each do |user| %>
+    <a href="/photos/index/<%= user.id %>"><%= user.first_name %> <%= user.last_name %></a>
+<% end %>
+
+<%= form_tag do %>
+    <p> Search photos by name or comment: <%= text_field_tag :substring, '', :id => "substring" %></p>
+<% end %>
+
+<div id="result"></div>
+
+<script type="text/javascript" src="/assets/PhotoSearch.js"></script>
+<script type="text/javascript">
+    //<![CDATA[
+    new PhotoSearch("substring","result","/photos/search?substring=");
+    //]]>
+</script>

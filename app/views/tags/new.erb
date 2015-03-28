@@ -1,0 +1,28 @@
+<% @title = "Tag Photo" %>
+
+<%= form_for(:tag, :url => {:action => :create, :id => @photo_id}) do |form| %>
+    <table class="form">
+      <tr>
+        <% photo = Photo.all().find_by_id(@photo_id) %>
+        <td class="tagImage">Click and drag to select tag area:<div id="image"><%= image_tag(photo.file_name, height: '200') %></div><br />Created <%= photo.date_time.getlocal %></td>
+        <td><%= form.label(:name, "Select User to Tag:")%></td>
+        <td>
+          <%= form.collection_select(:user_id, User.all, :id, :full_name) %>
+          <%= submit_tag "Submit" %>
+        </td>
+      </tr>
+    </table>
+    <%= form.hidden_field(:X, :value => 0) %>
+    <%= form.hidden_field(:Y, :value => 0) %>
+    <%= form.hidden_field(:width, :value => 0) %>
+    <%= form.hidden_field(:height, :value => 0) %>
+    <script type="text/javascript" src="/assets/Tagger.js"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+        var feedback_div = document.createElement('hidden');
+        feedback_div.innerHTML = '<div id="feedback_div"></div>';
+        document.getElementById("image").appendChild(feedback_div);
+        new Tagger("image","feedback_div","tag_X","tag_Y","tag_width","tag_height");
+        //]]>
+    </script>
+<% end %>

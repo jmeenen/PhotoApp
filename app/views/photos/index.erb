@@ -1,0 +1,11 @@
+<% user = @users.find_by_id(@id) %>
+<% photos = user.photos %>
+<% @title = user.first_name + " " + user.last_name + "'s Photos" %>
+<table cellspacing="0">
+  <% photos.each do |photo| %>
+      <tr>
+        <%= render(:partial => "photos",
+                   :locals => {:photo => photo}) %>
+      </tr>
+  <% end %>
+</table>

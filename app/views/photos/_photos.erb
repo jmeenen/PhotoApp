@@ -1,0 +1,47 @@
+<td class="imageCell">
+  <div class="image" id="<%= photo.id %>">
+    <%= image_tag(photo.file_name, height: '200') %>
+  </div><br />
+  Created <%= photo.date_time.getlocal %><br />
+  <a href="/comments/new/<%= photo.id %>">New Comment</a><br/>
+  <a href="/tags/new/<%= photo.id %>">Tag Photo</a><br/>
+</td>
+
+<td class="comments">
+  <% photo.comments.each do |comment| %>
+      <%= render(:partial => "comments",
+                 :locals => {:comment => comment}) %>
+  <% end %>
+</td>
+
+<script type="text/javascript" src="/assets/TagViewer.js"></script>
+<script type="text/javascript">
+    //<![CDATA[
+    var tagIDs = [];
+    var tagNames = [];
+    var photoIDs = [];
+
+    <% photo.tags.each do |tag| %>
+        var tag = document.createElement('div');
+        tag.innerHTML = '<div class="tag" style="left: <%= tag.X %>px; top: <%= tag.Y %>px; width: <%= tag.width %>px; height: <%= tag.height %>px;"></div>';
+        tag.id = "tag_div_"+<%= tag.id %>;
+        document.getElementById(<%= tag.photo.id %>).appendChild(tag);
+        tagIDs.push("tag_div_"+<%= tag.id %>);
+        tagNames.push("<%= tag.user.full_name %>");
+        photoIDs.push(<%= tag.photo.id %>);
+    <% end %>
+
+    //var name_div = document.createElement('D');
+    //name_div.innerHTML = '<div id="name_div"></div>';
+    //document.getElementById(photoID).appendChild(name_div);
+
+    for (var i = 0; i < tagIDs.length; i++) {
+        var name_div = document.createElement('div');
+        name_div.id = "name_div_" + photoIDs[i];
+        name_div.style.position = "absolute";
+        name_div.style.color = "red";
+        document.getElementById(photoIDs[i]).appendChild(name_div);
+        new TagViewer(tagIDs[i],"name_div_"+photoIDs[i],tagNames[i]);
+    }
+    //]]>
+</script>

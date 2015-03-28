@@ -1,0 +1,20 @@
+<% @title = "Login" %>
+
+<% if flash[:notice] %>
+    <div class="noLoginError"><%= flash[:notice] %></div><br/>
+<% end %>
+
+<%= form_tag("/users/post_login", :method => "post") do %>
+    <table class="form">
+        <tr>
+          <td><%= label_tag(:name, "Login name:")%></td>
+          <td><%= text_field_tag(:login) %></td>
+        </tr>
+        <tr>
+          <td><%= label_tag(:name, "Password:")%></td>
+          <td><%= password_field_tag(:password) %></td>
+        </tr>
+    </table>
+    <%= submit_tag "Login"  %>
+<% end %> <br/>
+<a href="/users/new">Register</a>

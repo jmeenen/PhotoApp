@@ -1,0 +1,15 @@
+<table cellspacing="0">
+  <% counter = 0 %>
+  <% @photos.each do |photo| %>
+      <% if counter > 6 %>
+          <% counter = 0 %>
+          <tr></tr>
+      <% end %>
+      <td>
+        <a href="/photos/index/<%= photo.user.id %>#<%= photo.id %>">
+          <div><%= image_tag(photo.file_name, height: '100') %></div>
+        </a>
+      </td>
+      <% counter = counter+1 %>
+  <% end %>
+</table>

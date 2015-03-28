@@ -1,0 +1,6 @@
+<p>
+  <%= comment.date_time.getlocal %>
+  <% user = comment.user %>
+  <a href="/photos/index/<%= user.id %>"><%= user.first_name %> <%= user.last_name %></a>
+  <br /><%= comment.comment %>
+</p>

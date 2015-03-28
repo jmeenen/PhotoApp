@@ -1,0 +1,18 @@
+<% @title = "Upload New Photo" %>
+
+<%= form_for(:photo, :url => {:action => :create}, :multipart => true) do |form| %>
+    <table class="form">
+      <tr>
+        <td><%= form.label(:name, "Upload new photo:")%></td>
+        <td>
+          <% if @photo %>
+              <% @photo.errors.full_messages.each do |msg| %>
+                  <div class="notLoggedInError"><%= msg %></div><br/>
+              <% end %>
+          <% end %>
+          <%= form.file_field(:photo) %><br/>
+        </td>
+      </tr>
+    </table>
+    <%= submit_tag "Upload" %>
+<% end %>

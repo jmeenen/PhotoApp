@@ -1,0 +1,35 @@
+// Place all the styles related to the photos controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.imageCell {
+  padding: 20px;
+  border-bottom: 3px solid navy;
+}
+
+.comments {
+  padding: 10px;
+  border-bottom: 3px solid navy;
+}
+
+.notLoggedInError {
+  color: red;
+}
+
+.image {
+  position: relative;
+  line-height: 0px;
+}
+
+.name_div {
+  position: absolute;
+  color: red;
+}
+
+.tag {
+  border-style: solid;
+  border-width: 2px;
+  border-color: red;
+  box-sizing: border-box;
+  position: absolute;
+}

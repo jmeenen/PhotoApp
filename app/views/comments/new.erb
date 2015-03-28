@@ -1,0 +1,20 @@
+<% @title = "New Comment" %>
+
+<%= form_for(:comment, :url => {:action => :create, :id => @photo_id}) do |form| %>
+    <table class="form">
+      <tr>
+        <% photo = Photo.all().find_by_id(@photo_id) %>
+        <td class="commentImage"><%= image_tag(photo.file_name, height: '200') %><br />Created <%= photo.date_time.getlocal %></td>
+        <td><%= form.label(:name, "New Comment:")%></td>
+        <td>
+          <% if @comment %>
+              <% @comment.errors.full_messages.each do |msg| %>
+                  <div class="noCommentError"><%= msg %></div><br/>
+              <% end %>
+          <% end %>
+          <%= form.text_area(:comment, cols: 60, rows: 5) %><br/>
+          <%= submit_tag "Submit" %>
+        </td>
+      </tr>
+    </table>
+<% end %>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title><%= @title %></title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<table cellspacing="0">
+  <tr>
+    <td id="headerText"><%= @title %></td>
+    <td id="headerImage"><div></div></td>
+  </tr>
+</table>
+
+<div class="main">
+  <a class="newPhoto" href="/photos/new">New Photo</a>
+  <div class="loginlogout">
+    <% if session[:id].nil? then %>
+        <a href="/users/login">Login</a>
+    <% else %>
+        <% user = @users.find_by_id(session[:id]) %>
+        Hi <%= user.first_name %>! <a href="/users/logout">Logout</a>
+    <% end %>
+  </div> <br />
+  <%= yield %>
+</div>
+
+</body>
+</html>
